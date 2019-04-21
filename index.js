@@ -21,18 +21,15 @@ app.use(express.static("."));
 // 	});
 // })
 
-app.get('/save', function (req, res) {
-	var datatosave = req.query.datatosave;
-	console.log("saving: " + datatosave);
-	var thedata = {"data": datatosave};
-// Insert the data into the database
-	db.insert(thedata, function (err, newDocs) {
-		console.log("err: " + err);
-		console.log("newDocs: " + newDocs);
-	});
-	res.send("test");
-});
+app.engine('html', mustacheExpress());
+app.set('view engine', 'html');
+app.set('views', __dirname);
 
+app.get('/', function(req, res) {
+    res.render('index', {
+      Name: req.query.form_input_name
+    });
+  });
 
 app.listen(7000, function () {
   console.log('Example app listening on port 7000!')
