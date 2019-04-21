@@ -22,7 +22,7 @@ app.use(express.static("."));
 // 	});
 // })
 
-app.engine('html', mustacheExpress());
+app.engine('mustache', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname);
 
