@@ -27,7 +27,19 @@ app.set('views', __dirname);
 
 app.get('/', function(req, res) {
     res.render('index', {
-      Name: req.query.form_input_name
+      Name: req.query.form_input_NAME
+    });
+  });
+
+  app.get('/', function(req, res) {
+    res.render('index', {
+      Name: req.query.form_input_JOB
+    });
+  });
+
+  app.get('/', function(req, res) {
+    res.render('index', {
+      Name: req.query.form_input_PERSON
     });
   });
 
