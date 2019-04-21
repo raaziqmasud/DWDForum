@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express()
 var cors = require('cors')
-var mustacheExpress = require('mustache-express')
+var mustachE = require('mustache-express')
  
 app.use(cors())
 
@@ -52,11 +52,5 @@ app.listen(process.env.PORT || 7000, function () {
     console.log('Example app listening on port 7000!')
   })
 
-// // Create a JavaScript Object with data to store
-// var datatosave = {
-// 	name: "Shawn",
-// 	message: "Hello world"
-// };
-		
 
 
