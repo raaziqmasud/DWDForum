@@ -2,25 +2,19 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var mustacheExpress = require('mustache-express')
+var bodypars = require('body-parser')
+let url= require('url')
+let path = require('path')
+let { Client } = require('pg')
  
 app.use(cors())
-
-// Database to store data, don't forget autoload: true
-// var Datastore = require('nedb');
-// var db = new Datastore({filename: "data2.db", autoload: true});
-
 app.use(express.static("."));
 
-// app.get('/data3', function (req, res) {
-// 	// Find all of the existing docs in the database
-// 	db.find({}, function(err, docs) {
-// 		res.send(docs);
-// 		// // Loop through the results, send each one as if it were a new chat message
-// 		// for (var i = 0; i < docs.length; i++) {
-// 		// 	console.log(docs[i].name + " " + docs[i].message);
-// 		// }
-// 	});
-// })
+let client;
+
+if (process.env.data){
+    client = new Client({connectionString: process.env.data, ssl: true})
+}
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
