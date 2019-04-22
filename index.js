@@ -31,24 +31,27 @@ app.get('/', function (req, res) {
 
 app.post('/name', function (req, res) {
     console.log(req.body.NAME)
-    res.render('index', {
+    res.render('page', {
         Name: req.body.NAME
     });
 });
 
-app.post('/job', function (req, res) {
+app.post('/next', function (req, res) {
     console.log(req.body)
     res.render('index', {
         Job: req.body.JOB
     });
-});
-
-app.post('/person', function (req, res) {
-    console.log(req.body)
     res.render('index', {
         Person: req.body.PERSON
     });
 });
+
+// app.post('/person', function (req, res) {
+//     console.log(req.body)
+//     res.render('index', {
+//         Person: req.body.PERSON
+//     });
+// });
 
 // app.listen(7000, function () {
 //   console.log('Example app listening on port 7000!')
