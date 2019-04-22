@@ -4,25 +4,37 @@
 </head>
 <body>
   <h1>Who are you?</h1>
-  <form method="GET" action="/name">
+  <form method="POST" action="/name">
     Answer:
     <input type = "text" name = "NAME">
     <input type = "submit">
   </form>
 
+{{ #Name }}
+  Your Name Is {{ Name }}
+ {{ /Name }} 
+
   <h1>What do you do?</h1>
-  <form method="GET" action="/job">
+  <form method="POST" action="/job">
     Answer:
     <input type = "text" name = "JOB">
     <input type = "submit">
   </form>
+
+{{ #Job }}
+  Your Job Is {{ Job }}
+ {{ /Job }} 
   
 <h1>Who do you love?</h1>
-  <form method="GET" action="/person">
+  <form method="POST" action="/person">
     Answer:
     <input type = "text" name = "PERSON">
     <input type = "submit">
   </form>
+
+  {{ #Person }}
+  You Love {{ Person }}
+ {{ /Person }} 
 
 </body>
  

@@ -3,40 +3,52 @@ var app = express()
 var cors = require('cors')
 var mustacheExpress = require('mustache-express')
 var bodypars = require('body-parser')
-let url= require('url')
+var urlencodedParser = bodypars.urlencoded({ extended: true });
+let url = require('url')
 let path = require('path')
 let { Client } = require('pg')
- 
+
 app.use(cors())
-app.use(express.static("."));
+//app.use(express.static("."));
+app.use(urlencodedParser);
 
 let client;
 
-if (process.env.data){
-    client = new Client({connectionString: process.env.data, ssl: true})
+if (process.env.data) {
+    client = new Client({ connectionString: process.env.data, ssl: true })
 }
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname);
 
-app.get('/', function(req, res) {
-    res.render('index', {
-      Name: req.query.form_input_NAME
-    });
-  });
 
-  app.get('/', function(req, res) {
-    res.render('index', {
-      Name: req.query.form_input_JOB
-    });
-  });
+app.get('/', function (req, res) {
+    console.log('index is running!')
+    res.render('index', {});
+})
 
-  app.get('/', function(req, res) {
+
+app.post('/name', function (req, res) {
+    console.log(req.body.NAME)
     res.render('index', {
-      Name: req.query.form_input_PERSON
+        Name: req.body.NAME
     });
-  });
+});
+
+app.post('/job', function (req, res) {
+    console.log(req.body)
+    res.render('index', {
+        Job: req.body.JOB
+    });
+});
+
+app.post('/person', function (req, res) {
+    console.log(req.body)
+    res.render('index', {
+        Person: req.body.PERSON
+    });
+});
 
 // app.listen(7000, function () {
 //   console.log('Example app listening on port 7000!')
@@ -44,7 +56,7 @@ app.get('/', function(req, res) {
 
 app.listen(process.env.PORT || 7000, function () {
     console.log('Example app listening on port 7000!')
-  })
+})
 
 
 
