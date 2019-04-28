@@ -14,9 +14,12 @@ app.use(urlencodedParser);
 
 let client;
 
-if (process.env.data) {
-    client = new Client({ connectionString: process.env.data, ssl: true })
-}
+if (process.env.DATABASE_URL){
+    client = new Client({connectionString: process.env.DATABASE_URL, ssl: true});
+  } else {
+    client = new Client({database: 'DWDForum'});
+  }
+  client.connect();
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
@@ -28,6 +31,32 @@ app.get('/', function (req, res) {
     res.render('index', {});
 })
 
+app.get('/', function(req, res1){
+    client.query('SELECT * FROM posts', (err, res2) => {
+      if (err) throw err;
+      for (let row of res2.rows) {
+        console.log(JSON.stringify(row));
+      }
+      let messagesArray = res2.rows;
+      res1.render('index', {
+        messagesArray
+      });
+      // client.end();
+    });
+
+});
+
+app.post('/post',function (req, res3){
+var mytext = req.body.NAME;
+  if (mytext === undefined){
+    res3.sendFile(path.join(__dirname + '/index.html'))
+  }else{
+    client.query('INSERT INTO posts (message) VALUES (\'' + mytext + '\')', function (error, results) {
+    if (error) throw error;
+    res3.redirect('/post');
+  });
+  }
+})
 
 app.post('/name', function (req, res) {
     console.log(req.body.NAME)

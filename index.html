@@ -3,6 +3,13 @@
 <head>
 </head>
 <body>
+
+ 
+<form method="POST" action="/post">
+    <input type="text" name="mytext" required />
+    <input type="submit" value="Submit" />
+     </form>
+
   <h1>Who are you?</h1>
   <form method="POST" action="/name">
     Answer:
@@ -10,31 +17,31 @@
     <input type = "submit">
   </form>
 
-{{ #Name }}
-  Your Name Is {{ Name }}
- {{ /Name }} 
 
   <h1>What do you do?</h1>
-  <form method="POST" action="/job">
+  <form method="POST" action="/next">
     Answer:
     <input type = "text" name = "JOB">
     <input type = "submit">
+
+<h1>Who do you love?</h1>
+Answer:
+<input type = "text" name = "PERSON">
+    <input type = "submit">
   </form>
 
-{{ #Job }}
-  Your Job Is {{ Job }}
- {{ /Job }} 
+<p>
+
+ </p>
   
-<h1>Who do you love?</h1>
+<!-- <h1>Who do you love?</h1>
   <form method="POST" action="/person">
     Answer:
     <input type = "text" name = "PERSON">
     <input type = "submit">
-  </form>
+  </form> -->
 
-  {{ #Person }}
-  You Love {{ Person }}
- {{ /Person }} 
+ 
 
 </body>
  
